@@ -49,7 +49,7 @@ const globalRateLimiter = rateLimit({
     
     // Key generator (default: IP address)
     keyGenerator: (req) => {
-        return req.ip || req.connection.remoteAddress || 'unknown';
+        return req.ip || req.socket?.remoteAddress || 'unknown';
     },
 });
 
@@ -88,7 +88,7 @@ const authRateLimiter = rateLimit({
     
     // Key generator combines IP and attempted email for better tracking
     keyGenerator: (req) => {
-        const ip = req.ip || req.connection.remoteAddress || 'unknown';
+        const ip = req.ip || req.socket?.remoteAddress || 'unknown';
         const email = req.body?.email || '';
         return `${ip}:${email}`;
     },
@@ -126,7 +126,7 @@ const authIpCeilingLimiter = rateLimit({
     legacyHeaders: false,
 
     keyGenerator: (req) => {
-        return req.ip || req.connection.remoteAddress || 'unknown';
+        return req.ip || req.socket?.remoteAddress || 'unknown';
     },
 
     skipSuccessfulRequests: true,

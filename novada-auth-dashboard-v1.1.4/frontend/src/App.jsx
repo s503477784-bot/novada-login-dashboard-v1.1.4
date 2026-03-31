@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Routes, Route, Navigate, useLocation } from 'react-router-dom'
+import { Routes, Route, Navigate, Link, useLocation } from 'react-router-dom'
 import Sidebar from './components/Sidebar'
 import Header from './components/Header'
 import Overview from './pages/Overview'
@@ -62,7 +62,7 @@ export default function App() {
                 <div className="flex flex-col items-center justify-center py-32 text-center">
                   <p className="text-6xl font-bold text-gray-200">404</p>
                   <p className="mt-3 text-sm font-semibold text-gray-500">Page not found</p>
-                  <a href="/overview" className="mt-5 inline-flex items-center gap-1.5 rounded-xl bg-violet-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-violet-700 transition-colors">Back to Overview</a>
+                  <Link to="/overview" className="mt-5 inline-flex items-center gap-1.5 rounded-xl bg-violet-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-violet-700 transition-colors">Back to Overview</Link>
                 </div>
               } />
             </Routes>

@@ -33,7 +33,7 @@ router.get('/health', (req, res) => {
  * GET /api/client-ip
  */
 router.get('/client-ip', (req, res) => {
-    const ip = req.ip || req.connection.remoteAddress || '';
+    const ip = req.ip || req.socket?.remoteAddress || '';
     // Strip IPv6-mapped IPv4 prefix (::ffff:)
     const cleanIp = ip.replace(/^::ffff:/, '');
     res.json({
