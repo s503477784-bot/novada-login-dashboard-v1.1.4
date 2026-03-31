@@ -1,0 +1,1556 @@
+/**
+ * =============================================================================
+ * Novada Auth System - CSS Variables
+ * =============================================================================
+ * iOS-inspired design system variables
+ * All colors, spacing, and design tokens are defined here
+ */
+
+:root {
+    /* ---------------------------------------------------------------------
+     * Color Palette
+     * --------------------------------------------------------------------- */
+    
+    /* Background Colors */
+    --ios-bg: #F5F5F7;
+    --ios-card-bg: #FFFFFF;
+    --ios-input-bg: #F2F2F7;
+    
+    /* Text Colors */
+    --ios-text-primary: #1D1D1F;
+    --ios-text-secondary: #86868B;
+    --ios-text-placeholder: #C7C7CC;
+    
+    /* Brand Colors - Neon Purple Pink Theme */
+    --primary-purple: #9372FF;
+    --primary-purple-light: rgba(147, 114, 255, 0.1);
+    --primary-purple-hover: #7b5ce0;
+    
+    /* Status Colors */
+    --error-red: #FF3B30;
+    --error-red-bg: #FFF2F2;
+    --success-green: #34C759;
+    --warning-yellow: #FFCC00;
+    --info-blue: #007AFF;
+    
+    /* Border Colors */
+    --border-light: #E5E5EA;
+    --border-focus: var(--primary-purple);
+    
+    /* ---------------------------------------------------------------------
+     * Shadows
+     * --------------------------------------------------------------------- */
+    --shadow-diffuse: 0 12px 40px rgba(0, 0, 0, 0.05);
+    --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.015);
+    --shadow-button: 0 2px 8px rgba(0, 0, 0, 0.08);
+    --shadow-input-focus: 0 0 0 2px var(--primary-purple);
+    --shadow-error-focus: 0 0 0 2px var(--error-red);
+    
+    /* ---------------------------------------------------------------------
+     * Border Radius
+     * --------------------------------------------------------------------- */
+    --radius-card: 28px;
+    --radius-input: 14px;
+    --radius-capsule: 50px;
+    --radius-button: 14px;
+    --radius-small: 8px;
+    --radius-circle: 50%;
+    
+    /* ---------------------------------------------------------------------
+     * Spacing
+     * --------------------------------------------------------------------- */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+    --spacing-2xl: 48px;
+    
+    /* ---------------------------------------------------------------------
+     * Typography
+     * --------------------------------------------------------------------- */
+    --font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    
+    --font-size-xs: 10px;
+    --font-size-sm: 12px;
+    --font-size-md: 13px;
+    --font-size-base: 15px;
+    --font-size-lg: 16px;
+    --font-size-xl: 18px;
+    --font-size-2xl: 24px;
+    --font-size-3xl: 26px;
+    --font-size-4xl: 28px;
+    --font-size-5xl: 38px;
+    
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    
+    --line-height-tight: 1.05;
+    --line-height-normal: 1.5;
+    
+    /* ---------------------------------------------------------------------
+     * Transitions
+     * --------------------------------------------------------------------- */
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s ease;
+    --transition-bounce: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    --transition-pop: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    
+    /* ---------------------------------------------------------------------
+     * Z-Index Scale
+     * --------------------------------------------------------------------- */
+    --z-dropdown: 100;
+    --z-modal: 200;
+    --z-toast: 300;
+    
+    /* ---------------------------------------------------------------------
+     * Layout
+     * --------------------------------------------------------------------- */
+    --container-max-width: 1200px;
+    --card-max-width: 480px;
+    --auth-card-padding: 40px;
+    --auth-card-padding-mobile: 24px;
+}
+
+/* Dark mode support (optional - uncomment to enable) */
+/*
+@media (prefers-color-scheme: dark) {
+    :root {
+        --ios-bg: #000000;
+        --ios-card-bg: #1C1C1E;
+        --ios-input-bg: #2C2C2E;
+        --ios-text-primary: #FFFFFF;
+        --ios-text-secondary: #8E8E93;
+        --border-light: #38383A;
+    }
+}
+*/
+/**
+ * =============================================================================
+ * Novada Auth System - Base Styles
+ * =============================================================================
+ * CSS Reset and base element styling
+ */
+
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Remove default margin and padding */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    vertical-align: baseline;
+}
+
+/* HTML5 display-role reset */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+
+/* Set core root defaults */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Set core body defaults */
+body {
+    font-family: var(--font-family);
+    background-color: #0a0a0a;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ios-text-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    line-height: var(--line-height-normal);
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Background with breathing animation */
+body::before {
+    content: '';
+    position: fixed;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    background-image: url('../assets/images/71f6723b117af5fb7e36d829dfcd6b7f.webp?v=1.1.4');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -1;
+    animation: breathe 8s ease-in-out infinite;
+}
+
+@keyframes breathe {
+    0%, 100% {
+        transform: translateY(0) scale(1);
+    }
+    50% {
+        transform: translateY(-10px) scale(1.02);
+    }
+}
+
+/* Remove list styles */
+ol, ul {
+    list-style: none;
+}
+
+/* Anchor styles */
+a {
+    color: inherit;
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+a:hover {
+    color: var(--primary-purple);
+}
+
+/* Image defaults */
+img, picture, video, canvas, svg {
+    display: block;
+    max-width: 100%;
+}
+
+/* Remove built-in form typography styles */
+input, button, textarea, select {
+    font: inherit;
+}
+
+/* Button reset */
+button {
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-family: inherit;
+}
+
+/* Focus visible for accessibility */
+:focus-visible {
+    outline: 2px solid var(--primary-purple);
+    outline-offset: 2px;
+}
+
+/* Remove focus outline for mouse users */
+:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* Selection color */
+::selection {
+    background-color: var(--primary-purple-light);
+    color: var(--primary-purple);
+}
+
+/* Placeholder styling */
+::placeholder {
+    color: var(--ios-text-placeholder);
+    opacity: 1;
+}
+
+/* Scrollbar styling (Webkit browsers) */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--ios-bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border-light);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--ios-text-secondary);
+}
+
+/* Remove spinner from number inputs */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+/* Disabled state */
+[disabled] {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* Hidden utility */
+.hidden {
+    display: none !important;
+}
+
+/* Screen reader only */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+/**
+ * =============================================================================
+ * Novada Auth System - Component Styles
+ * =============================================================================
+ * Reusable UI component styles
+ */
+
+/* =============================================================================
+ * Form Components
+ * ============================================================================= */
+
+/* Form Group */
+.form-group {
+    margin-bottom: var(--spacing-md);
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-medium);
+    color: var(--ios-text-secondary);
+    margin-left: 4px;
+}
+
+/* Form Input */
+.form-input {
+    width: 100%;
+    border: none;
+    border-radius: var(--radius-input);
+    font-size: var(--font-size-lg);
+    background: var(--ios-input-bg);
+    padding: 14px 16px;
+    outline: none;
+    color: var(--ios-text-primary);
+    transition: var(--transition-fast);
+}
+
+.form-input:focus {
+    background: var(--ios-card-bg);
+    box-shadow: var(--shadow-input-focus);
+}
+
+.form-input.is-error {
+    background: var(--error-red-bg) !important;
+    box-shadow: var(--shadow-error-focus) !important;
+}
+
+/* Password Input Wrapper */
+.password-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-input-wrapper .form-input {
+    padding-right: 48px;
+}
+
+.password-toggle-btn {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ios-text-secondary);
+    transition: color var(--transition-fast);
+    border-radius: var(--radius-small);
+}
+
+.password-toggle-btn:hover {
+    color: var(--primary-purple);
+}
+
+.password-toggle-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Field Error Message */
+.field-error-msg {
+    color: var(--error-red);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    margin-top: 6px;
+    margin-left: 4px;
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+.field-error-msg.visible {
+    display: block;
+}
+
+/* =============================================================================
+ * Buttons
+ * ============================================================================= */
+
+/* Primary Submit Button */
+.submit-btn {
+    width: 100%;
+    background-color: var(--primary-purple);
+    color: white;
+    font-weight: var(--font-weight-bold);
+    border: none;
+    padding: 14px 0;
+    border-radius: var(--radius-button);
+    cursor: pointer;
+    font-size: var(--font-size-lg);
+    transition: var(--transition-fast);
+    margin-top: 5px;
+}
+
+.submit-btn:hover {
+    filter: brightness(0.95);
+}
+
+.submit-btn:active {
+    transform: scale(0.98);
+}
+
+.submit-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Google Button */
+.google-btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: var(--radius-input);
+    background: var(--ios-input-bg);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-weight: var(--font-weight-semibold);
+    color: var(--ios-text-primary);
+    transition: var(--transition-fast);
+    font-size: var(--font-size-base);
+}
+
+.google-btn:hover {
+    background: #E5E5EA;
+}
+
+.google-btn .google-icon {
+    width: 18px;
+    height: 18px;
+}
+
+/* =============================================================================
+ * Divider
+ * ============================================================================= */
+
+.divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: var(--spacing-lg) 0;
+    color: var(--ios-text-placeholder);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.divider::before {
+    margin-right: 15px;
+}
+
+.divider::after {
+    margin-left: 15px;
+}
+
+/* =============================================================================
+ * Toggle Switch
+ * ============================================================================= */
+
+.toggle-switch {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.toggle-input {
+    display: none;
+}
+
+.toggle-slider {
+    width: 36px;
+    height: 20px;
+    background-color: var(--border-light);
+    border-radius: 20px;
+    position: relative;
+    transition: var(--transition-normal);
+}
+
+.toggle-slider::before {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border-radius: var(--radius-circle);
+    background: white;
+    top: 2px;
+    left: 2px;
+    transition: var(--transition-normal);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.toggle-input:checked + .toggle-slider {
+    background-color: var(--primary-purple);
+}
+
+.toggle-input:checked + .toggle-slider::before {
+    transform: translateX(16px);
+}
+
+.toggle-text {
+    color: var(--ios-text-secondary);
+    font-weight: var(--font-weight-medium);
+    font-size: var(--font-size-md);
+}
+
+/* =============================================================================
+ * Captcha Widget
+ * ============================================================================= */
+
+.math-captcha-wrapper {
+    margin-bottom: var(--spacing-lg);
+    background: var(--ios-card-bg);
+    border: 1px solid var(--border-light);
+    border-radius: 24px;
+    padding: 12px 14px 22px;
+    box-shadow: var(--shadow-card);
+    transition: var(--transition-fast);
+}
+
+.math-captcha-wrapper.is-error {
+    background: var(--error-red-bg) !important;
+    box-shadow: var(--shadow-error-focus) !important;
+}
+
+.math-captcha-label {
+    font-size: var(--font-size-xs) + 1;
+    color: var(--ios-text-secondary);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: 10px;
+    display: block;
+    margin-left: 4px;
+}
+
+.captcha-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    position: relative;
+}
+
+.canvas-wrapper,
+.btn-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.canvas-wrapper {
+    flex: 1;
+}
+
+.captcha-canvas {
+    background-color: var(--ios-input-bg);
+    border-radius: 12px;
+    cursor: pointer;
+    height: 48px;
+    width: 100%;
+    min-width: 100px;
+}
+
+.refresh-text {
+    position: absolute;
+    top: 54px;
+    left: 0;
+    font-size: 9px;
+    color: #999;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.captcha-symbol {
+    font-weight: var(--font-weight-bold);
+    color: var(--border-light);
+    padding: 0 2px;
+}
+
+.captcha-input {
+    width: 65px;
+    height: 48px;
+    border: none;
+    background: var(--ios-input-bg);
+    border-radius: 12px;
+    font-size: var(--font-size-xl);
+    text-align: center;
+    outline: none;
+    font-weight: var(--font-weight-semibold);
+    color: var(--ios-text-primary);
+    transition: var(--transition-fast);
+    flex-shrink: 0;
+}
+
+.captcha-input:focus {
+    background: var(--ios-card-bg);
+    box-shadow: var(--shadow-input-focus);
+}
+
+.check-btn-circle {
+    width: 48px;
+    height: 48px;
+    border: none;
+    background: var(--ios-card-bg);
+    border-radius: var(--radius-circle);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-bounce);
+    flex-shrink: 0;
+    color: var(--ios-text-placeholder);
+    box-shadow: var(--shadow-button);
+}
+
+.check-btn-circle:hover {
+    transform: scale(1.1);
+    color: var(--primary-purple);
+}
+
+.check-btn-circle.is-success {
+    background: var(--primary-purple);
+    color: white;
+}
+
+.check-btn-circle.is-error {
+    background: var(--error-red);
+    color: white;
+    animation: iosShake 0.4s ease-in-out;
+}
+
+.check-btn-circle svg {
+    width: 22px;
+    height: 22px;
+    fill: currentColor;
+}
+
+.captcha-msg {
+    position: absolute;
+    top: 54px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity var(--transition-fast);
+    pointer-events: none;
+}
+
+/* =============================================================================
+ * Success Animation
+ * ============================================================================= */
+
+.success-content-wrapper {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 30px 0;
+    animation: popIn var(--transition-pop);
+}
+
+.success-content-wrapper.visible {
+    display: flex;
+}
+
+.success-checkmark {
+    width: 80px;
+    height: 80px;
+    border-radius: var(--radius-circle);
+    display: block;
+    stroke-width: 2;
+    stroke: white;
+    stroke-miterlimit: 10;
+    margin-bottom: var(--spacing-lg);
+    box-shadow: inset 0px 0px 0px var(--primary-purple);
+    animation: fill 0.4s ease-in-out 0.4s forwards, scale 0.3s ease-in-out 0.9s both;
+}
+
+.success-checkmark__circle {
+    stroke-dasharray: 166;
+    stroke-dashoffset: 166;
+    stroke-width: 2;
+    stroke-miterlimit: 10;
+    stroke: var(--primary-purple);
+    fill: none;
+    animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+
+.success-checkmark__check {
+    transform-origin: 50% 50%;
+    stroke-dasharray: 48;
+    stroke-dashoffset: 48;
+    animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+}
+
+.success-title {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--ios-text-primary);
+    margin-bottom: 10px;
+}
+
+.success-sub {
+    font-size: var(--font-size-base);
+    color: var(--ios-text-secondary);
+    line-height: var(--line-height-normal);
+}
+
+/* =============================================================================
+ * Capsule Tags
+ * ============================================================================= */
+
+.capsule-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.capsule-item {
+    background: var(--ios-card-bg);
+    padding: 8px 16px;
+    border-radius: var(--radius-capsule);
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-semibold);
+    color: var(--ios-text-primary);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.02);
+    white-space: nowrap;
+}
+
+.capsule-icon {
+    color: var(--primary-purple);
+    font-weight: 900;
+    font-size: var(--font-size-input);
+}
+
+/* =============================================================================
+ * Animations
+ * ============================================================================= */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes popIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes iosShake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-4px);
+    }
+    75% {
+        transform: translateX(4px);
+    }
+}
+
+@keyframes stroke {
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes scale {
+    0%, 100% {
+        transform: none;
+    }
+    50% {
+        transform: scale3d(1.1, 1.1, 1);
+    }
+}
+
+@keyframes fill {
+    100% {
+        box-shadow: inset 0px 0px 0px 50px var(--primary-purple);
+    }
+}
+/**
+ * =============================================================================
+ * Novada Auth System - Layout Styles
+ * =============================================================================
+ * Page layout and container styles
+ */
+
+/* =============================================================================
+ * Main Container
+ * ============================================================================= */
+
+.container {
+    display: flex;
+    width: 100%;
+    max-width: var(--container-max-width);
+    min-height: 600px;
+    margin: 20px;
+    align-items: stretch;
+    justify-content: center;
+    gap: 60px;
+}
+
+/* =============================================================================
+ * Panel Content (Left & Right)
+ * ============================================================================= */
+
+.panel-content {
+    width: 100%;
+    max-width: var(--card-max-width);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* =============================================================================
+ * Left Panel (Marketing)
+ * ============================================================================= */
+
+.left-panel {
+    padding-right: 20px;
+}
+
+/* Brand Logo */
+.brand-logo {
+    font-size: var(--font-size-4xl);
+    font-weight: var(--font-weight-bold);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: var(--spacing-lg);
+    color: #000;
+    letter-spacing: -0.5px;
+}
+
+.brand-logo span {
+    color: var(--primary-purple);
+    font-size: 34px;
+}
+
+/* Marketing Hero Section */
+.marketing-hero h1 {
+    font-size: var(--font-size-5xl);
+    line-height: var(--line-height-tight);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--spacing-md);
+    letter-spacing: -0.5px;
+}
+
+.marketing-hero p {
+    font-size: var(--font-size-lg);
+    line-height: var(--line-height-normal);
+    color: var(--ios-text-secondary);
+    margin-bottom: var(--spacing-lg);
+}
+
+/* Image Placeholder Box */
+.img-placeholder-box {
+    background-color: transparent;
+    border: none;
+    border-radius: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: var(--ios-text-placeholder);
+    font-weight: var(--font-weight-medium);
+    margin-bottom: var(--spacing-lg);
+    text-align: center;
+}
+
+/* Partner Section */
+.partner-section {
+    margin-top: 30px;
+}
+
+.partner-title {
+    font-size: var(--font-size-xs);
+    color: var(--ios-text-secondary);
+    margin-bottom: 8px;
+    font-weight: var(--font-weight-semibold);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.partner-img-slot {
+    height: 30px;
+    display: flex;
+    align-items: center;
+    color: var(--ios-text-placeholder);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+}
+
+.partner-banner {
+    background: transparent;
+}
+
+.partner-banner img {
+    background: transparent;
+}
+
+/* =============================================================================
+ * Left Panel Text Colors for Dark Background
+ * ============================================================================= */
+
+.left-panel {
+    color: #FFFFFF;
+}
+
+.left-panel .brand-logo {
+    color: #FFFFFF;
+}
+
+.left-panel .marketing-hero h1 {
+    color: #FFFFFF;
+}
+
+.left-panel .marketing-hero p {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.left-panel .capsule-item {
+    background: rgba(255, 255, 255, 0.15);
+    color: #FFFFFF;
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.left-panel .partner-title {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* =============================================================================
+ * Right Panel (Auth Card)
+ * ============================================================================= */
+
+.auth-card {
+    background: var(--ios-card-bg);
+    padding: var(--auth-card-padding);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-diffuse);
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    transition: height var(--transition-normal);
+}
+
+/* Auth Card Title */
+.auth-title {
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--spacing-lg);
+    text-align: center;
+    letter-spacing: -0.5px;
+}
+
+/* Form Content Wrapper */
+.form-content-wrapper {
+    transition: opacity var(--transition-normal), transform var(--transition-normal);
+}
+
+.form-content-wrapper.hidden {
+    opacity: 0;
+    transform: scale(0.95);
+    pointer-events: none;
+    display: none;
+}
+
+/* Auth Footer */
+.auth-footer {
+    font-size: var(--font-size-md);
+    text-align: center;
+    margin-top: var(--spacing-lg);
+    color: var(--ios-text-secondary);
+    line-height: var(--line-height-normal);
+}
+
+.auth-footer a {
+    color: var(--ios-text-primary);
+    text-decoration: none;
+    font-weight: var(--font-weight-semibold);
+    transition: color var(--transition-fast);
+}
+
+.auth-footer a:hover {
+    color: var(--primary-purple);
+}
+
+/* Footer Link with Animated Underline */
+.footer-link-animated {
+    color: var(--primary-purple) !important;
+    position: relative;
+    display: inline-block;
+}
+
+.footer-link-animated::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background-color: var(--primary-purple);
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+}
+
+.footer-link-animated:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+/* =============================================================================
+ * Login-Specific Layout
+ * ============================================================================= */
+
+.login-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+    font-size: var(--font-size-md);
+}
+
+/* =============================================================================
+ * Mobile Logo (hidden on desktop, shown when left panel is hidden)
+ * ============================================================================= */
+
+.mobile-logo {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 24px;
+}
+
+.mobile-logo-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, var(--primary-purple), #7c3aed);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(147, 114, 255, 0.3);
+}
+
+.mobile-logo-icon span {
+    color: #FFFFFF;
+    font-size: 18px;
+    font-weight: var(--font-weight-bold);
+}
+
+.mobile-logo-text {
+    font-size: 22px;
+    font-weight: var(--font-weight-bold);
+    color: var(--ios-text-primary);
+    letter-spacing: -0.5px;
+}
+
+/* =============================================================================
+ * Responsive Design
+ * ============================================================================= */
+
+@media (max-width: 960px) {
+    .container {
+        flex-direction: column;
+        gap: 0;
+        margin: 20px;
+        align-items: center;
+    }
+
+    .left-panel {
+        display: none;
+    }
+
+    .panel-content {
+        max-width: 100%;
+    }
+
+    .mobile-logo {
+        display: flex;
+    }
+}
+
+@media (max-width: 480px) {
+    .auth-card {
+        padding: 30px var(--auth-card-padding-mobile);
+    }
+
+    .captcha-input {
+        width: 60px;
+    }
+
+    .captcha-canvas {
+        min-width: 80px;
+    }
+
+    .container {
+        margin: 10px;
+        width: auto;
+    }
+
+    .mobile-logo {
+        margin-bottom: 18px;
+    }
+}
+/**
+ * =============================================================================
+ * Novada Auth System - Page-Specific Styles
+ * =============================================================================
+ * Styles specific to individual pages
+ */
+
+/* =============================================================================
+ * Login Page Specifics
+ * ============================================================================= */
+
+/* Remember Me Toggle */
+.login-page .login-actions {
+    margin-bottom: 20px;
+}
+
+.login-page .remember-text {
+    color: var(--ios-text-secondary);
+    font-weight: var(--font-weight-medium);
+}
+
+/* =============================================================================
+ * Register Page Specifics
+ * ============================================================================= */
+
+.register-page .auth-card {
+    padding: 35px 40px;
+}
+
+.register-page .divider {
+    margin: 20px 0;
+}
+
+/* Terms of Service Link */
+.register-page .auth-footer a:not(.footer-link-animated) {
+    color: var(--ios-text-primary);
+}
+
+/* =============================================================================
+ * Error States - Page Level
+ * ============================================================================= */
+
+.page-error {
+    background: var(--error-red-bg);
+    border: 1px solid rgba(255, 59, 48, 0.35);
+    border-radius: var(--radius-input);
+    padding: 12px var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+    display: none;
+}
+
+.page-error.visible {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    animation: fadeIn 0.3s ease;
+}
+
+.page-error::before {
+    content: '';
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+    margin-top: 1px;
+    background-color: var(--error-red);
+    border-radius: 50%;
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z'/%3E%3C/svg%3E");
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z'/%3E%3C/svg%3E");
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+}
+
+.page-error-text {
+    color: var(--error-red);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.45;
+}
+
+/* =============================================================================
+ * Loading States
+ * ============================================================================= */
+
+.loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.9);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    border-radius: var(--radius-card);
+}
+
+.loading-overlay.visible {
+    display: flex;
+}
+
+.loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid var(--border-light);
+    border-top-color: var(--primary-purple);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* =============================================================================
+ * Password Strength Indicator (Register Page)
+ * ============================================================================= */
+
+.password-strength {
+    margin-top: 8px;
+    display: none;
+}
+
+.password-strength.visible {
+    display: block;
+}
+
+.password-strength-bar {
+    height: 4px;
+    background: var(--border-light);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 4px;
+}
+
+.password-strength-fill {
+    height: 100%;
+    width: 0;
+    transition: width 0.3s ease, background-color 0.3s ease;
+    border-radius: 2px;
+}
+
+.password-strength-fill.weak {
+    width: 33%;
+    background-color: var(--error-red);
+}
+
+.password-strength-fill.medium {
+    width: 66%;
+    background-color: var(--warning-yellow);
+}
+
+.password-strength-fill.strong {
+    width: 100%;
+    background-color: var(--success-green);
+}
+
+.password-strength-text {
+    font-size: var(--font-size-xs);
+    color: var(--ios-text-secondary);
+}
+
+/* =============================================================================
+ * Confirm Password Match Indicator
+ * ============================================================================= */
+
+.password-match-indicator {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 6px;
+    font-size: var(--font-size-sm);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.password-match-indicator.visible {
+    opacity: 1;
+}
+
+.password-match-indicator.match {
+    color: var(--success-green);
+}
+
+.password-match-indicator.no-match {
+    color: var(--error-red);
+}
+
+.password-match-indicator svg {
+    width: 14px;
+    height: 14px;
+}
+
+/* =============================================================================
+ * Countdown Timer (Register Success)
+ * ============================================================================= */
+
+.countdown-wrapper {
+    margin-top: 5px;
+    font-size: var(--font-size-md);
+    color: var(--ios-text-secondary);
+}
+
+.countdown-number {
+    font-weight: var(--font-weight-bold);
+    color: var(--primary-purple);
+}
+/* =============================================================================
+ * Google Button - Coming Soon State (v1.1.2)
+ * ============================================================================= */
+
+.google-btn--disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    position: relative;
+}
+
+.google-btn--disabled:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+.coming-soon-badge {
+    display: inline-block;
+    margin-left: 8px;
+    padding: 2px 8px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    background: linear-gradient(135deg, #ede9fe, #f3e8ff);
+    color: #7c3aed;
+    border-radius: 20px;
+    vertical-align: middle;
+}
+
+/* =============================================================================
+ * Enhanced Mobile Responsive Design (v1.1.2)
+ * ============================================================================= */
+
+@media (max-width: 768px) {
+    body {
+        min-height: 100vh;
+        min-height: 100dvh;
+    }
+
+    .container {
+        flex-direction: column;
+        gap: 0;
+        margin: 0;
+        min-height: 100vh;
+        min-height: 100dvh;
+        width: 100%;
+        border-radius: 0;
+    }
+
+    .left-panel {
+        display: none;
+    }
+
+    .panel-content {
+        max-width: 100%;
+        width: 100%;
+        padding: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 1;
+    }
+
+    .auth-card {
+        width: 100%;
+        max-width: 480px;
+        border-radius: 20px;
+        padding: 28px 20px;
+        box-shadow: 0 10px 40px rgba(15, 23, 42, 0.08);
+    }
+
+    .auth-title {
+        font-size: 22px;
+        margin-bottom: 20px;
+    }
+
+    .google-btn {
+        font-size: 14px;
+        padding: 12px 16px;
+    }
+
+    .form-input {
+        font-size: 16px; /* Prevents iOS zoom on focus */
+        padding: 12px 14px;
+    }
+
+    .submit-btn {
+        font-size: 15px;
+        padding: 14px;
+    }
+
+    .captcha-row {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .canvas-wrapper {
+        flex: 1;
+        min-width: 120px;
+    }
+
+    .captcha-input {
+        width: 56px;
+        font-size: 16px; /* Prevents iOS zoom */
+    }
+
+    .btn-wrapper {
+        flex-shrink: 0;
+    }
+
+    .auth-footer {
+        font-size: 13px;
+    }
+
+    .field-error-msg {
+        font-size: 12px;
+    }
+
+    .divider {
+        margin: 16px 0;
+    }
+
+    .form-group label {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 380px) {
+    .auth-card {
+        padding: 24px 16px;
+        border-radius: 16px;
+    }
+
+    .captcha-row {
+        gap: 6px;
+    }
+
+    .captcha-canvas {
+        min-width: 100px;
+        height: 40px;
+    }
+
+    .captcha-input {
+        width: 48px;
+    }
+
+    .coming-soon-badge {
+        display: none;
+    }
+}
+
+/* Safe area insets for notched devices */
+@supports (padding: env(safe-area-inset-bottom)) {
+    .panel-content {
+        padding-bottom: calc(16px + env(safe-area-inset-bottom));
+    }
+}

@@ -1,0 +1,154 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-primary: #7c3aed;
+  --color-primary-light: #8b5cf6;
+  --color-primary-dark: #5b21b6;
+  --color-amber: #f59e0b;
+  --color-amber-light: #fbbf24;
+  --app-base-font-size: 17px;
+  --app-shell-max-width: 1120px;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(124, 58, 237, 0.15) transparent;
+}
+*::-webkit-scrollbar { width: 5px; }
+*::-webkit-scrollbar-track { background: transparent; }
+*::-webkit-scrollbar-thumb { background: rgba(124, 58, 237, 0.15); border-radius: 3px; }
+*::-webkit-scrollbar-thumb:hover { background: rgba(124, 58, 237, 0.3); }
+
+html {
+  font-size: var(--app-base-font-size);
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  background: #f4f6fb;
+  overflow: hidden;
+  min-width: 320px;
+}
+
+@layer base {
+  ::selection {
+    background: rgba(124, 58, 237, 0.15);
+    color: #3b0764;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-white rounded-2xl border border-gray-100;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.02);
+  }
+  .card-hover { @apply transition-all duration-300; }
+  .card-hover:hover {
+    box-shadow: 0 8px 30px rgba(124, 58, 237, 0.07), 0 2px 8px rgba(0,0,0,0.04);
+    @apply border-purple-200/60;
+  }
+
+  .btn-primary {
+    @apply px-4 py-2 bg-violet-600 hover:bg-violet-700 text-white font-semibold rounded-xl text-sm transition-all duration-200;
+    box-shadow: 0 1px 3px rgba(124,58,237,0.25), inset 0 1px 0 rgba(255,255,255,0.1);
+  }
+  .btn-primary:hover { box-shadow: 0 4px 14px rgba(124,58,237,0.3); }
+
+  .btn-amber {
+    @apply px-4 py-2 bg-amber-400 hover:bg-amber-500 text-gray-900 font-bold rounded-xl text-sm transition-all duration-200;
+    box-shadow: 0 1px 3px rgba(245,158,11,0.3);
+  }
+  .btn-ghost {
+    @apply px-4 py-2 text-gray-500 hover:text-gray-800 hover:bg-gray-100 rounded-xl text-sm font-medium transition-all duration-200;
+  }
+
+  .input-field {
+    @apply w-full px-3.5 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-gray-800 placeholder-gray-400 focus:outline-none focus:border-violet-400 focus:ring-2 focus:ring-violet-100 transition-all duration-200 text-sm;
+  }
+
+  .badge-active {
+    @apply inline-flex items-center gap-1.5 px-2.5 py-0.5 text-xs font-semibold rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200;
+  }
+  .badge-disabled {
+    @apply inline-flex items-center gap-1.5 px-2.5 py-0.5 text-xs font-semibold rounded-full bg-gray-50 text-gray-400 border border-gray-200;
+  }
+
+  .tab-active { @apply text-violet-700 border-b-2 border-violet-600 font-semibold; }
+  .tab-inactive { @apply text-gray-400 hover:text-gray-600 border-b-2 border-transparent font-medium; }
+
+  .stagger-1 { animation-delay: 0.05s; }
+  .stagger-2 { animation-delay: 0.1s; }
+  .stagger-3 { animation-delay: 0.15s; }
+  .stagger-4 { animation-delay: 0.2s; }
+  .stagger-5 { animation-delay: 0.25s; }
+  .stagger-6 { animation-delay: 0.3s; }
+}
+
+.bg-waves {
+  position: relative;
+  background: linear-gradient(135deg, #f4f6fb 0%, #eef0f8 50%, #f4f6fb 100%);
+}
+.bg-waves::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 10% 20%, rgba(139,92,246,0.03) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(245,158,11,0.02) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.terminal-bg {
+  background: #1e1b2e;
+  border: 1px solid #2d2a3e;
+  border-radius: 12px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideRight {
+  from { opacity: 0; transform: translateX(24px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* =============================================================================
+ * Mobile Responsive Enhancements (v1.1.4)
+ * ============================================================================= */
+
+/* Cards stack properly on mobile */
+@media (max-width: 640px) {
+  .card {
+    border-radius: 16px !important;
+  }
+}
+
+/* Safe area for notched devices */
+@supports (padding: env(safe-area-inset-bottom)) {
+  main {
+    padding-bottom: calc(20px + env(safe-area-inset-bottom));
+  }
+}
+
+/* Touch-friendly tap targets */
+@media (pointer: coarse) {
+  button, a, [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Prevent horizontal overflow on mobile */
+html, body {
+  overflow-x: hidden;
+}

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novada Login</title>
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/styles.css?v=1.1.4">
+</head>
+<body class="login-page">
+
+    <div class="container">
+        
+        <!-- Left Panel - Marketing Content -->
+        <div class="left-panel panel-content">
+            <div class="brand-logo"><span>N</span> novada</div>
+            <div class="marketing-hero">
+                <h1>Welcome Back,<br>Scraper</h1>
+                <p>Continue accessing the Novada user dashboard and proxy workspace.</p>
+                
+                <div class="img-placeholder-box hero-img-slot">
+                    <img src="assets/images/hero.svg?v=1.1.4" alt="Dashboard Preview" style="width:100%; height:100%; object-fit:cover; border-radius:24px;">
+                </div>
+
+                <div class="capsule-container">
+                    <div class="capsule-item"><span class="capsule-icon">✓</span> 102M+ Proxies</div>
+                    <div class="capsule-item"><span class="capsule-icon">✓</span> 99.9% Uptime</div>
+                    <div class="capsule-item"><span class="capsule-icon">✓</span> 24/7 Support</div>
+                </div>
+            </div>
+            <div class="partner-section">
+                <p class="partner-title">Trusted by industry leaders</p>
+                <div class="partner-banner">
+                    <img src="assets/images/partner-banner.svg?v=1.1.4" alt="Adherence to GDPR, CCPA, and SEC regulations" style="width:100%; height:auto; border-radius: 12px;">
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Panel - Auth Card -->
+        <div class="panel-content">
+            <!-- Mobile Logo (visible only on small screens) -->
+            <div class="mobile-logo">
+                <div class="mobile-logo-icon"><span>N</span></div>
+                <span class="mobile-logo-text">novada</span>
+            </div>
+            <div class="auth-card">
+                
+                <!-- Loading Overlay -->
+                <div class="loading-overlay">
+                    <div class="loading-spinner"></div>
+                </div>
+                
+                <!-- Form Content -->
+                <div id="formContent" class="form-content-wrapper">
+                    <h2 class="auth-title">Log In</h2>
+
+                    <!-- Page-level error banner -->
+                    <div id="pageError" class="page-error" role="alert" aria-live="assertive">
+                        <p id="pageErrorText" class="page-error-text"></p>
+                    </div>
+
+                    <!-- Google Login Button (Coming Soon) -->
+                    <button type="button" id="googleBtn" class="google-btn google-btn--disabled" disabled title="Google login coming soon">
+                        <span style="color:#4285F4; font-weight:bold; font-size:18px;">G</span> 
+                        Continue with Google
+                        <span class="coming-soon-badge">Coming Soon</span>
+                    </button>
+                    
+                    <div class="divider">OR</div>
+
+                    <form id="loginForm" novalidate>
+                        
+                        <!-- Email Field -->
+                        <div class="form-group">
+                            <label for="loginEmail">Email</label>
+                            <input 
+                                type="email" 
+                                id="loginEmail" 
+                                name="email"
+                                class="form-input" 
+                                placeholder="name@company.com" 
+                                required
+                                autocomplete="email"
+                            >
+                            <div id="errorEmail" class="field-error-msg">Please enter a valid email address.</div>
+                        </div>
+
+                        <!-- Password Field -->
+                        <div class="form-group">
+                            <label for="loginPwd">Password</label>
+                            <div class="password-input-wrapper">
+                                <input 
+                                    type="password" 
+                                    id="loginPwd" 
+                                    name="password"
+                                    class="form-input" 
+                                    placeholder="Enter your password" 
+                                    required
+                                    autocomplete="current-password"
+                                >
+                                <!-- Toggle button will be added by PasswordInput component -->
+                            </div>
+                            <div id="errorPwd" class="field-error-msg">Password is required.</div>
+                        </div>
+
+                        <!-- Captcha Widget -->
+                        <div id="captchaWrapper" class="math-captcha-wrapper">
+                            <label class="math-captcha-label">Security Check</label>
+                            <div class="captcha-row">
+                                <div class="canvas-wrapper">
+                                    <canvas id="mathCanvas" class="captcha-canvas" width="140" height="48"></canvas>
+                                    <div class="refresh-text">Tap image to refresh</div>
+                                </div>
+                                <div class="captcha-symbol">=</div>
+                                <input 
+                                    type="tel" 
+                                    class="captcha-input" 
+                                    id="captchaInput" 
+                                    placeholder="?" 
+                                    maxlength="3" 
+                                    required
+                                    autocomplete="off"
+                                >
+                                <div class="btn-wrapper">
+                                    <button type="button" class="check-btn-circle" id="checkBtn">
+                                        <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                                    </button>
+                                    <div id="captchaMsg" class="captcha-msg"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="errorCaptcha" class="field-error-msg" style="margin-top:-18px; margin-bottom:18px; margin-left: 6px;"></div>
+
+                        <!-- Remember Me Toggle -->
+                        <div class="login-actions">
+                            <label class="toggle-switch">
+                                <input type="checkbox" class="toggle-input" id="rememberMe" checked>
+                                <div class="toggle-slider"></div>
+                                <span class="toggle-text">Remember me</span>
+                            </label>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit" class="submit-btn">Log In</button>
+                        
+                        <!-- Footer Links -->
+                        <div class="auth-footer">
+                            Don't have an account? <a href="register.html" class="footer-link-animated">Sign up</a>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Success Animation -->
+                <div id="successContent" class="success-content-wrapper">
+                    <svg class="success-checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                        <circle class="success-checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+                        <path class="success-checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                    </svg>
+                    <h2 class="success-title">Welcome Back!</h2>
+                    <p class="success-sub">Logging you in securely...</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Files -->
+    <script src="js/utils/dom.js?v=1.1.4"></script>
+    <script src="js/utils/validation.js?v=1.1.4"></script>
+    <script src="js/utils/api.js?v=1.1.4"></script>
+    <script src="js/utils/errorMessages.js?v=1.1.4"></script>
+    <script src="js/components/FormInput.js?v=1.1.4"></script>
+    <script src="js/components/PasswordInput.js?v=1.1.4"></script>
+    <script src="js/components/GoogleButton.js?v=1.1.4"></script>
+    <script src="js/components/CaptchaWidget.js?v=1.1.4"></script>
+    <script src="js/components/SuccessAnimation.js?v=1.1.4"></script>
+    <script src="js/pages/login.js?v=1.1.4"></script>
+
+</body>
+</html>
