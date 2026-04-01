@@ -1,4 +1,5 @@
 import { useState, useCallback, useRef } from 'react'
+import { createPortal } from 'react-dom'
 import { Plus, Edit2, Trash2, X, Info, Locate, Loader2 } from 'lucide-react'
 import DataTable from '../components/DataTable'
 import { usePersistentList } from '../utils/store'
@@ -148,7 +149,7 @@ export default function WhitelistedIPs() {
         {items.length === 0 && <div className="py-12 text-center text-sm text-gray-400">No IPs added yet</div>}
       </div>
 
-      {modalOpen && (
+      {modalOpen && createPortal(
         <div className="fixed inset-0 z-40 flex items-center justify-center bg-black/20 backdrop-blur-sm" onClick={closeModal}>
           <div className="w-[440px] max-w-[calc(100vw-2rem)] rounded-2xl border border-gray-100 bg-white shadow-2xl animate-[fadeIn_0.2s_ease-out]" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center justify-between border-b border-gray-100 p-5">
@@ -174,7 +175,8 @@ export default function WhitelistedIPs() {
               <button onClick={handleSave} className="btn-primary text-sm">Save</button>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </div>
   )
