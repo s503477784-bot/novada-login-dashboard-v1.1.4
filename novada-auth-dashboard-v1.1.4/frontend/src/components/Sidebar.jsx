@@ -2,7 +2,8 @@ import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import {
   LayoutDashboard, RotateCw, Infinity, Terminal,
-  Shield, Users, ChevronRight, X, ChevronUp, Send, Mail
+  Shield, Users, ChevronRight, X, ChevronUp, Send, Mail,
+  CreditCard, Settings
 } from 'lucide-react'
 
 const navGroups = [
@@ -25,6 +26,13 @@ const navGroups = [
       { to: '/tools/generator', icon: Terminal, label: 'Endpoint Generator' },
       { to: '/tools/users', icon: Users, label: 'Users' },
       { to: '/tools/whitelist', icon: Shield, label: 'Whitelist' },
+    ],
+  },
+  {
+    label: 'Account',
+    items: [
+      { to: '/account/billing', icon: CreditCard, label: 'Billing' },
+      { to: '/account/settings', icon: Settings, label: 'Settings' },
     ],
   },
 ]

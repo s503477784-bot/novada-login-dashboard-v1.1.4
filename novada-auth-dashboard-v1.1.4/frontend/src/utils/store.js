@@ -4,16 +4,25 @@
  */
 
 import { useSyncExternalStore, useCallback } from 'react'
-import { proxyUsers as seedUsers, whitelistedIps as seedWhitelistedIps } from '../data/mockData'
+import {
+  proxyUsers as seedUsers,
+  whitelistedIps as seedWhitelistedIps,
+  billingRecords as seedBillingRecords,
+  defaultSettings as seedAccountSettings,
+} from '../data/mockData'
 
 const KEYS = {
   proxyUsers: 'novada_proxy_users',
   whitelistedIps: 'novada_whitelisted_ips',
+  billingRecords: 'novada_billing_records',
+  accountSettings: 'novada_account_settings',
 }
 
 const SEEDS = {
   proxyUsers: seedUsers,
   whitelistedIps: seedWhitelistedIps,
+  billingRecords: seedBillingRecords,
+  accountSettings: seedAccountSettings,
 }
 
 // In-memory cache so every subscriber sees the same reference.
@@ -50,7 +59,7 @@ function save(key, data) {
 
 /**
  * React hook – returns [items, setItems] backed by localStorage.
- * @param {'proxyUsers' | 'whitelistedIps'} key
+ * @param {'proxyUsers' | 'whitelistedIps' | 'billingRecords' | 'accountSettings'} key
  */
 export function usePersistentList(key) {
   const subscribe = useCallback(
