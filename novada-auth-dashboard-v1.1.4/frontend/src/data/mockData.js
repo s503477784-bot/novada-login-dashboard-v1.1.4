@@ -90,6 +90,26 @@ export const countries = [
   { code: 'SG', name: 'Singapore' },
 ]
 
+export const billingRecords = [
+  { id: 1,  date: '2026-03-12', type: 'Recharge',  description: 'Account balance top-up',                    amount: 500.00,  paymentMethod: 'Visa ••••4242',      status: 'Completed', invoiceNumber: 'INV-2026-0048' },
+  { id: 2,  date: '2026-03-05', type: 'Purchase',  description: 'Rotating Proxies — Advanced Plan (100 GB)',  amount: 400.00,  paymentMethod: 'Visa ••••4242',      status: 'Completed', invoiceNumber: 'INV-2026-0047' },
+  { id: 3,  date: '2026-02-28', type: 'Recharge',  description: 'Account balance top-up',                    amount: 250.00,  paymentMethod: 'PayPal',             status: 'Completed', invoiceNumber: 'INV-2026-0044' },
+  { id: 4,  date: '2026-02-20', type: 'Purchase',  description: 'Static ISP Proxies — 50 Ports (1 month)',   amount: 250.00,  paymentMethod: 'Mastercard ••••8831', status: 'Completed', invoiceNumber: 'INV-2026-0041' },
+  { id: 5,  date: '2026-02-14', type: 'Refund',    description: 'Service credit — downtime compensation',     amount: 18.50,   paymentMethod: 'Original method',    status: 'Completed', invoiceNumber: 'INV-2026-0039' },
+  { id: 6,  date: '2026-02-10', type: 'Recharge',  description: 'Account balance top-up',                    amount: 150.00,  paymentMethod: 'Crypto (BTC)',        status: 'Completed', invoiceNumber: 'INV-2026-0036' },
+  { id: 7,  date: '2026-02-01', type: 'Purchase',  description: 'Rotating Proxies — Starter Plan (20 GB)',   amount: 130.00,  paymentMethod: 'Visa ••••4242',      status: 'Completed', invoiceNumber: 'INV-2026-0032' },
+  { id: 8,  date: '2026-01-25', type: 'Recharge',  description: 'Account balance top-up',                    amount: 100.00,  paymentMethod: 'PayPal',             status: 'Completed', invoiceNumber: 'INV-2026-0028' },
+  { id: 9,  date: '2026-01-18', type: 'Recharge',  description: 'Account balance top-up',                    amount: 50.00,   paymentMethod: 'Mastercard ••••8831', status: 'Pending',   invoiceNumber: null },
+  { id: 10, date: '2026-01-10', type: 'Purchase',  description: 'Rotating Proxies — Micro Plan (5 GB)',      amount: 45.00,   paymentMethod: 'Visa ••••4242',      status: 'Failed',    invoiceNumber: null },
+]
+
+export const defaultSettings = {
+  pendingPasswordChange: null,
+  pendingEmailChange: null,
+  notificationEmail: '',
+  notifications: { billing: true, security: true, updates: false },
+}
+
 export const staticIps = [
   '10.0.0.11:8080',
   '10.0.0.12:8080',

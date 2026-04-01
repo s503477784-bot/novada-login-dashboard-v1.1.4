@@ -8,6 +8,8 @@ import UnlimitedProxies from './pages/UnlimitedProxies'
 import EndpointGenerator from './pages/EndpointGenerator'
 import ProxyUsers from './pages/ProxyUsers'
 import WhitelistedIPs from './pages/WhitelistedIPs'
+import Billing from './pages/Billing'
+import AccountSettings from './pages/Settings'
 
 export default function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
@@ -58,6 +60,8 @@ export default function App() {
               <Route path="/tools/generator" element={<EndpointGenerator />} />
               <Route path="/tools/users" element={<ProxyUsers />} />
               <Route path="/tools/whitelist" element={<WhitelistedIPs />} />
+              <Route path="/account/billing" element={<Billing />} />
+              <Route path="/account/settings" element={<AccountSettings />} />
               <Route path="*" element={
                 <div className="flex flex-col items-center justify-center py-32 text-center">
                   <p className="text-6xl font-bold text-gray-200">404</p>
