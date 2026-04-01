@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { Plus, Search, Eye, EyeOff, Copy, Edit2, RefreshCw, Trash2, X, Zap, Info } from 'lucide-react'
 import DataTable from '../components/DataTable'
 import { appProfile } from '../data/mockData'
@@ -235,7 +236,7 @@ export default function ProxyUsers() {
         {filtered.length === 0 && <div className="py-12 text-center text-sm text-gray-400">No users found</div>}
       </div>
 
-      {drawerOpen && (
+      {drawerOpen && createPortal(
         <div className="fixed inset-0 z-40 flex items-center justify-center bg-black/20 backdrop-blur-sm" onClick={closeDrawer}>
           <div className="w-[480px] max-w-[calc(100vw-2rem)] rounded-2xl border border-gray-100 bg-white shadow-2xl animate-[fadeIn_0.2s_ease-out]" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center justify-between border-b border-gray-100 p-5">
@@ -272,7 +273,8 @@ export default function ProxyUsers() {
               <button onClick={handleSave} className="btn-primary text-sm">Save</button>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </div>
   )

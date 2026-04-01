@@ -124,10 +124,7 @@ const ErrorMessages = {
      */
     get(code, fallback = 'Something went wrong. Please try again.') {
         const entry = this.messages[code];
-        if (!entry) {
-            return `${fallback} [REF: UNKNOWN]`;
-        }
-        return `${entry.text} [REF: ${entry.ref}]`;
+        return entry ? entry.text : fallback;
     },
 
     /**

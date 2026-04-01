@@ -41,6 +41,7 @@ async function bootstrap() {
 
     const payload = await response.json().catch(() => ({}))
     window.__APP_AUTH_USER__ = payload?.data?.user || null
+    Object.freeze(window.__APP_AUTH_USER__)
     renderApp(rootEl)
   } catch (error) {
     window.location.replace('/auth/login.html')
