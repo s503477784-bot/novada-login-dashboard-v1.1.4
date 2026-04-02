@@ -224,7 +224,7 @@ export default function ProxyUsers() {
               <td className="px-4 py-3.5"><span className="text-sm text-gray-500">{user.note}</span></td>
               <td className="px-4 py-3.5"><span className="text-sm font-mono text-gray-500">{user.traffic}</span></td>
               <td className="px-4 py-3.5">
-                <div className="flex items-center gap-1">
+                <div className="flex items-center gap-1.5">
                   <button onClick={() => openEdit(user)} className="rounded-lg p-1.5 text-gray-400 transition-all hover:bg-violet-50 hover:text-violet-600" title="Edit" aria-label={`Edit ${user.username}`}><Edit2 size={13} /></button>
                   <button onClick={() => handleRegenerate(user)} className="rounded-lg p-1.5 text-gray-400 transition-all hover:bg-amber-50 hover:text-amber-500" title="Regenerate" aria-label={`Regenerate password for ${user.username}`}><RefreshCw size={13} /></button>
                   <button onClick={() => handleDelete(user)} className="rounded-lg p-1.5 text-gray-400 transition-all hover:bg-red-50 hover:text-red-500" title="Delete" aria-label={`Delete ${user.username}`}><Trash2 size={13} /></button>

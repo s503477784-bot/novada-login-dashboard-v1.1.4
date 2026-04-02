@@ -35,7 +35,7 @@ export default function UnlimitedProxies() {
               <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl border-2 border-amber-200/40 bg-gradient-to-br from-amber-50 to-orange-50">
                 <Server size={24} className="text-amber-500" />
               </div>
-              <h2 className="mb-2 text-xl font-bold text-gray-900">Static ISP Proxies</h2>
+              <h2 className="mb-2 text-xl font-bold text-gray-900">Product Overview</h2>
               <p className="max-w-md text-sm leading-relaxed text-gray-500">
                 <span className="font-bold text-gray-700">Real ISP-assigned residential IPs</span> that remain static and dedicated to your account. Unlike datacenter proxies, Static ISP Proxies carry genuine ISP fingerprints, making them ideal for tasks that require both high trust scores and long-lived sessions.
               </p>
@@ -50,7 +50,14 @@ export default function UnlimitedProxies() {
                 <div>
                   <p className="text-sm font-semibold text-gray-800">Custom Allocation — Contact Sales</p>
                   <p className="mt-1 text-xs leading-relaxed text-gray-500">
-                    Due to the dedicated nature of Static ISP Proxies, each allocation is provisioned individually by our sales team based on your specific requirements (target region, IP quantity, protocol, and use case). Please reach out to your account manager or our sales team to get a tailored plan.
+                    Each Static ISP allocation is provisioned individually based on your needs:
+                  </p>
+                  <ul className="mt-1.5 space-y-1 text-xs leading-relaxed text-gray-500">
+                    <li className="flex items-start gap-1.5"><span className="mt-1 h-1 w-1 flex-shrink-0 rounded-full bg-amber-400" />Target region &amp; IP quantity</li>
+                    <li className="flex items-start gap-1.5"><span className="mt-1 h-1 w-1 flex-shrink-0 rounded-full bg-amber-400" />Protocol &amp; use case requirements</li>
+                  </ul>
+                  <p className="mt-1.5 text-xs leading-relaxed text-gray-500">
+                    Reach out to your account manager or our sales team for a tailored plan.
                   </p>
                   <a href="mailto:sales@novada.io" className="mt-3 inline-flex items-center gap-2 rounded-xl bg-amber-500 px-4 py-2 text-xs font-semibold text-white shadow-sm shadow-amber-200 transition-all hover:bg-amber-600 hover:shadow-md">
                     <MessageCircle size={13} />
