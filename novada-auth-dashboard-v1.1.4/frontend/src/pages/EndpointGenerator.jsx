@@ -283,7 +283,7 @@ export default function EndpointGenerator() {
               </div>
               <div>
                 <h3 className="text-sm font-bold text-gray-800">1. Authentication Method</h3>
-                <p className="text-xs text-gray-400">Switch between account authentication and whitelist-based access.</p>
+                <p className="text-xs text-gray-400">Switch between user authentication and whitelist-based access.</p>
               </div>
             </div>
 
@@ -316,7 +316,8 @@ export default function EndpointGenerator() {
               </div>
 
               {authType === 'user' ? (
-                <div className="space-y-3">
+                <div className="rounded-2xl border border-gray-100 bg-gray-50/70 p-4">
+                  <p className="mb-2 text-[11px] font-bold uppercase tracking-wider text-gray-400">Selected User</p>
                   <div>
                     <label className="mb-1.5 block text-xs font-medium text-gray-500">Username</label>
                     <select value={username} onChange={(e) => setUsername(e.target.value)} className="input-field">
@@ -326,13 +327,14 @@ export default function EndpointGenerator() {
                     </select>
                     <p className="mt-1.5 text-xs text-gray-400">Select the proxy user for endpoint authentication.</p>
                   </div>
-                  <Link to="/tools/users" className="flex items-center justify-center gap-2 rounded-xl border border-violet-200 bg-violet-50/70 px-4 py-2.5 text-xs font-semibold text-violet-700 transition-colors hover:bg-violet-100">
-                    <ExternalLink size={13} />
+                  <Link to="/tools/users" className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-violet-600 transition-colors hover:text-violet-700 hover:underline">
+                    <ExternalLink size={12} />
                     Manage Users
                   </Link>
                 </div>
               ) : (
-                <div className="space-y-3">
+                <div className="rounded-2xl border border-gray-100 bg-gray-50/70 p-4">
+                  <p className="mb-2 text-[11px] font-bold uppercase tracking-wider text-gray-400">Selected IP</p>
                   <div>
                     <label className="mb-1.5 block text-xs font-medium text-gray-500">Whitelisted IP</label>
                     <select className="input-field font-mono" defaultValue="">
@@ -343,8 +345,8 @@ export default function EndpointGenerator() {
                     </select>
                     <p className="mt-1.5 text-xs text-gray-400">No credentials required. Requests from your whitelisted IPs are authenticated automatically.</p>
                   </div>
-                  <Link to="/tools/whitelist" className="flex items-center justify-center gap-2 rounded-xl border border-violet-200 bg-violet-50/70 px-4 py-2.5 text-xs font-semibold text-violet-700 transition-colors hover:bg-violet-100">
-                    <ExternalLink size={13} />
+                  <Link to="/tools/whitelist" className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-violet-600 transition-colors hover:text-violet-700 hover:underline">
+                    <ExternalLink size={12} />
                     Manage Whitelist
                   </Link>
                 </div>
@@ -438,7 +440,7 @@ export default function EndpointGenerator() {
 
             {sessionMode === 'sticky' && (
               <div className="mt-4 space-y-3">
-                <div className="max-w-[200px]">
+                <div className="max-w-xs">
                   <label className="mb-1.5 block text-xs font-medium text-gray-500">Sticky Minutes</label>
                   <input
                     type="number"

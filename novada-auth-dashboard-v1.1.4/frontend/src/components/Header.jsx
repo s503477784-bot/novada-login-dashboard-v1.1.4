@@ -118,6 +118,8 @@ export default function Header({ onMenuToggle }) {
           type="button"
           onClick={() => dropdownOpen ? setDropdownOpen(false) : openDropdown()}
           className="flex items-center gap-2 rounded-xl px-2 py-1.5 transition-colors hover:bg-gray-50 sm:px-3"
+          aria-label="User menu"
+          aria-expanded={dropdownOpen}
         >
           <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-violet-100 to-purple-100">
             <span className="text-xs font-bold text-violet-600">{sessionProfile.initials}</span>
@@ -130,7 +132,8 @@ export default function Header({ onMenuToggle }) {
         {dropdownOpen && createPortal(
           <div
             ref={dropdownRef}
-            className="fixed w-72 rounded-2xl border border-gray-100 bg-white shadow-2xl animate-[fadeIn_0.15s_ease-out] z-[9998]"
+            role="menu"
+            className="fixed w-72 max-w-[calc(100vw-2rem)] rounded-2xl border border-gray-100 bg-white shadow-2xl animate-[fadeIn_0.15s_ease-out] z-[9998]"
             style={{ top: dropdownPos.top, right: dropdownPos.right }}
           >
             <div className="flex items-center gap-3 p-4">

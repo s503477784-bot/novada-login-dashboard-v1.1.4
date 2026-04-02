@@ -138,7 +138,7 @@ export default function WhitelistedIPs() {
               <td className="px-4 py-3.5"><span className="text-sm text-gray-500">{item.note}</span></td>
               <td className="px-4 py-3.5"><span className="text-sm text-gray-400">{item.addedDate}</span></td>
               <td className="px-4 py-3.5">
-                <div className="flex items-center gap-1">
+                <div className="flex items-center gap-1.5">
                   <button onClick={() => openEdit(item)} className="rounded-lg p-1.5 text-gray-400 transition-all hover:bg-violet-50 hover:text-violet-600" title="Edit" aria-label={`Edit ${item.ip}`}><Edit2 size={13} /></button>
                   <button onClick={() => handleDelete(item)} className="rounded-lg p-1.5 text-gray-400 transition-all hover:bg-red-50 hover:text-red-500" title="Delete" aria-label={`Delete ${item.ip}`}><Trash2 size={13} /></button>
                 </div>
@@ -151,12 +151,12 @@ export default function WhitelistedIPs() {
 
       {modalOpen && createPortal(
         <div className="fixed inset-0 z-40 flex items-center justify-center bg-black/20 backdrop-blur-sm" onClick={closeModal}>
-          <div className="w-[440px] max-w-[calc(100vw-2rem)] rounded-2xl border border-gray-100 bg-white shadow-2xl animate-[fadeIn_0.2s_ease-out]" onClick={(e) => e.stopPropagation()}>
+          <div className="w-[480px] max-w-[calc(100vw-2rem)] rounded-2xl border border-gray-100 bg-white shadow-2xl animate-[fadeIn_0.2s_ease-out]" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center justify-between border-b border-gray-100 p-5">
               <h2 className="text-base font-bold text-gray-900">{editIp ? 'Edit Whitelisted IP' : 'Add Whitelisted IP'}</h2>
               <button onClick={closeModal} className="rounded-lg p-1.5 text-gray-400 transition-colors hover:bg-gray-50 hover:text-gray-600" aria-label="Close"><X size={18} /></button>
             </div>
-            <div className="space-y-4 p-5">
+            <div className="space-y-5 p-5">
               <div>
                 <label className="mb-1.5 block text-sm font-medium text-gray-700">IP Address</label>
                 <input type="text" value={form.ip} onChange={(e) => setForm((prev) => ({ ...prev, ip: e.target.value }))} placeholder="e.g., 203.0.113.42" className="input-field font-mono" />
