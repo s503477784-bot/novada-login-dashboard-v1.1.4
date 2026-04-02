@@ -9,6 +9,7 @@ import EndpointGenerator from './pages/EndpointGenerator'
 import ProxyUsers from './pages/ProxyUsers'
 import WhitelistedIPs from './pages/WhitelistedIPs'
 import Billing from './pages/Billing'
+import Wallet from './pages/Wallet'
 import AccountSettings from './pages/Settings'
 
 export default function App() {
@@ -61,6 +62,7 @@ export default function App() {
               <Route path="/tools/users" element={<ProxyUsers />} />
               <Route path="/tools/whitelist" element={<WhitelistedIPs />} />
               <Route path="/account/billing" element={<Billing />} />
+              <Route path="/account/wallet" element={<Wallet />} />
               <Route path="/account/settings" element={<AccountSettings />} />
               <Route path="*" element={
                 <div className="flex flex-col items-center justify-center py-32 text-center">
