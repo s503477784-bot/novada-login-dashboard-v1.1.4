@@ -2,7 +2,7 @@ import { useState, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import {
   DollarSign, Wallet, Calendar, FileText, X, Download,
-  ArrowDownLeft, ArrowUpRight, RotateCcw, Filter
+  ArrowDownLeft, ArrowUpRight, RotateCcw, Filter, Check
 } from 'lucide-react'
 import DataTable from '../components/DataTable'
 import { usePersistentList } from '../utils/store'
@@ -29,6 +29,7 @@ export default function Billing() {
   const [typeFilter, setTypeFilter] = useState('All')
   const [statusFilter, setStatusFilter] = useState('All')
   const [invoiceRecord, setInvoiceRecord] = useState(null)
+  const [pdfNotice, setPdfNotice] = useState(false)
 
   const filtered = useMemo(() => {
     let list = records
@@ -56,6 +57,11 @@ export default function Billing() {
     return completed.length > 0 ? formatDate(completed[0].date) : '—'
   }, [records])
 
+  const handleDownloadPdf = () => {
+    setPdfNotice(true)
+    setTimeout(() => setPdfNotice(false), 3000)
+  }
+
   return (
     <div className="space-y-6 animate-[slideUp_0.5s_ease-out]">
       {/* Page header */}
@@ -65,7 +71,7 @@ export default function Billing() {
       </div>
 
       {/* Summary cards */}
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <div className="card p-5">
           <div className="flex items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-violet-50">
@@ -83,12 +89,12 @@ export default function Billing() {
               <Wallet size={20} className="text-emerald-600" />
             </div>
             <div>
-              <p className="text-xs font-medium text-gray-400">Credits / Refunds</p>
+              <p className="text-xs font-medium text-gray-400">Service Credits</p>
               <p className="text-lg font-bold text-gray-900">{formatCurrency(totalRefunded)}</p>
             </div>
           </div>
         </div>
-        <div className="card p-5">
+        <div className="card p-5 sm:col-span-2 lg:col-span-1">
           <div className="flex items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-50">
               <Calendar size={20} className="text-amber-600" />
@@ -106,17 +112,17 @@ export default function Billing() {
         <div className="flex flex-col gap-3 border-b border-gray-100 p-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center gap-2">
             <Filter size={15} className="text-gray-400" />
-            <span className="text-sm font-semibold text-gray-700">Transactions</span>
+            <span className="text-sm font-semibold text-gray-700">Transaction History</span>
             <span className="rounded-full bg-gray-100 px-2 py-0.5 text-xs font-semibold text-gray-500">{filtered.length}</span>
           </div>
           <div className="flex gap-2">
-            <select value={typeFilter} onChange={(e) => setTypeFilter(e.target.value)} className="input-field w-auto !py-1.5 !text-xs">
+            <select value={typeFilter} onChange={(e) => setTypeFilter(e.target.value)} aria-label="Filter by type" className="input-field w-auto !py-1.5 !text-xs">
               <option>All</option>
               <option>Recharge</option>
               <option>Purchase</option>
               <option>Refund</option>
             </select>
-            <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} className="input-field w-auto !py-1.5 !text-xs">
+            <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} aria-label="Filter by status" className="input-field w-auto !py-1.5 !text-xs">
               <option>All</option>
               <option>Completed</option>
               <option>Pending</option>
@@ -143,8 +149,8 @@ export default function Billing() {
                   )
                 })()}
               </td>
-              <td className="px-4 py-3 text-sm text-gray-600 max-w-[220px] truncate">{row.description}</td>
-              <td className="whitespace-nowrap px-4 py-3 text-sm font-semibold text-gray-900">
+              <td className="px-4 py-3 text-sm text-gray-600 max-w-[260px] truncate" title={row.description}>{row.description}</td>
+              <td className={`whitespace-nowrap px-4 py-3 text-sm font-semibold ${row.type === 'Refund' ? 'text-emerald-600' : 'text-gray-900'}`}>
                 {row.type === 'Refund' ? '+' : ''}{formatCurrency(row.amount)}
               </td>
               <td className="whitespace-nowrap px-4 py-3 text-xs text-gray-500">{row.paymentMethod}</td>
@@ -166,7 +172,7 @@ export default function Billing() {
           )}
         />
         {filtered.length === 0 && (
-          <div className="py-12 text-center text-sm text-gray-400">No transactions match your filters</div>
+          <div className="py-12 text-center text-sm text-gray-500">No transactions match your filters</div>
         )}
       </div>
 
@@ -188,7 +194,7 @@ export default function Billing() {
             {/* Invoice body */}
             <div className="space-y-5 p-5">
               {/* From / To */}
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <div>
                   <p className="text-[10px] font-bold uppercase tracking-wider text-gray-400">From</p>
                   <p className="mt-1 text-sm font-semibold text-gray-800">Novada Ltd.</p>
@@ -220,7 +226,7 @@ export default function Billing() {
               </div>
 
               {/* Line items */}
-              <div className="overflow-hidden rounded-xl border border-gray-100">
+              <div className="overflow-x-auto rounded-xl border border-gray-100">
                 <table className="w-full text-sm">
                   <thead>
                     <tr className="border-b border-gray-100 bg-gray-50/50">
@@ -256,15 +262,23 @@ export default function Billing() {
             </div>
 
             {/* Footer */}
-            <div className="flex items-center justify-end gap-3 border-t border-gray-100 p-5">
-              <button onClick={() => setInvoiceRecord(null)} className="btn-ghost text-sm">Close</button>
-              <button
-                onClick={() => alert('PDF download will be available when the billing backend is connected.')}
-                className="btn-primary flex items-center gap-1.5 text-sm"
-              >
-                <Download size={14} />
-                Download PDF
-              </button>
+            <div className="flex flex-col gap-3 border-t border-gray-100 p-5">
+              {pdfNotice && (
+                <div className="flex items-center gap-2 rounded-xl border border-amber-200 bg-amber-50 px-3 py-2 text-xs font-medium text-amber-700 animate-[fadeIn_0.2s_ease-out]">
+                  <Check size={14} />
+                  PDF download will be available once the billing backend is connected.
+                </div>
+              )}
+              <div className="flex items-center justify-end gap-3">
+                <button onClick={() => setInvoiceRecord(null)} className="btn-ghost text-sm">Close</button>
+                <button
+                  onClick={handleDownloadPdf}
+                  className="btn-primary flex items-center gap-1.5 text-sm"
+                >
+                  <Download size={14} />
+                  Download PDF
+                </button>
+              </div>
             </div>
           </div>
         </div>,
