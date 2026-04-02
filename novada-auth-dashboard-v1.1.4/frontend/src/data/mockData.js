@@ -110,6 +110,22 @@ export const defaultSettings = {
   notifications: { billing: true, security: true, updates: false },
 }
 
+export const walletData = {
+  balance: 385.50,
+  transactions: [
+    { id: 1,  date: '2026-03-15', type: 'Recharge', description: 'Wallet top-up',                              amount: 200.00, paymentMethod: 'Visa ••••4242',       status: 'Completed' },
+    { id: 2,  date: '2026-03-14', type: 'Purchase', description: 'Rotating Proxies — Micro Plan (5 GB)',       amount: 45.00,  paymentMethod: 'Wallet Balance',      status: 'Completed' },
+    { id: 3,  date: '2026-03-10', type: 'Recharge', description: 'Wallet top-up',                              amount: 100.00, paymentMethod: 'PayPal',              status: 'Completed' },
+    { id: 4,  date: '2026-03-08', type: 'Purchase', description: 'Static ISP Proxies — 10 Ports (1 month)',    amount: 60.00,  paymentMethod: 'Wallet Balance',      status: 'Completed' },
+    { id: 5,  date: '2026-03-01', type: 'Refund',   description: 'Service credit — unused bandwidth',          amount: 12.50,  paymentMethod: 'Wallet Credit',       status: 'Completed' },
+    { id: 6,  date: '2026-02-25', type: 'Recharge', description: 'Wallet top-up',                              amount: 50.00,  paymentMethod: 'Crypto (BTC)',        status: 'Completed' },
+    { id: 7,  date: '2026-02-20', type: 'Purchase', description: 'Rotating Proxies — Starter Plan (20 GB)',    amount: 130.00, paymentMethod: 'Wallet Balance',      status: 'Completed' },
+    { id: 8,  date: '2026-02-15', type: 'Recharge', description: 'Wallet top-up',                              amount: 500.00, paymentMethod: 'Visa ••••4242',       status: 'Pending' },
+    { id: 9,  date: '2026-02-10', type: 'Purchase', description: 'Rotating Proxies — Basic Plan (1 GB)',       amount: 12.50,  paymentMethod: 'Wallet Balance',      status: 'Failed' },
+    { id: 10, date: '2026-02-05', type: 'Recharge', description: 'Wallet top-up',                              amount: 250.00, paymentMethod: 'Mastercard ••••8831', status: 'Completed' },
+  ],
+}
+
 export const staticIps = [
   '10.0.0.11:8080',
   '10.0.0.12:8080',

@@ -9,6 +9,7 @@ import {
   whitelistedIps as seedWhitelistedIps,
   billingRecords as seedBillingRecords,
   defaultSettings as seedAccountSettings,
+  walletData as seedWalletData,
 } from '../data/mockData'
 
 const KEYS = {
@@ -16,6 +17,7 @@ const KEYS = {
   whitelistedIps: 'novada_whitelisted_ips',
   billingRecords: 'novada_billing_records',
   accountSettings: 'novada_account_settings',
+  walletData: 'novada_wallet_data',
 }
 
 const SEEDS = {
@@ -23,6 +25,7 @@ const SEEDS = {
   whitelistedIps: seedWhitelistedIps,
   billingRecords: seedBillingRecords,
   accountSettings: seedAccountSettings,
+  walletData: seedWalletData,
 }
 
 // In-memory cache so every subscriber sees the same reference.
@@ -59,7 +62,7 @@ function save(key, data) {
 
 /**
  * React hook – returns [items, setItems] backed by localStorage.
- * @param {'proxyUsers' | 'whitelistedIps' | 'billingRecords' | 'accountSettings'} key
+ * @param {'proxyUsers' | 'whitelistedIps' | 'billingRecords' | 'accountSettings' | 'walletData'} key
  */
 export function usePersistentList(key) {
   const subscribe = useCallback(

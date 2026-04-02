@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 import {
   LayoutDashboard, RotateCw, Infinity, Terminal,
   Shield, Users, ChevronRight, X, ChevronUp, Send, Mail,
-  CreditCard, Settings
+  CreditCard, Wallet, Settings
 } from 'lucide-react'
 
 const navGroups = [
@@ -32,6 +32,7 @@ const navGroups = [
     label: 'Account',
     items: [
       { to: '/account/billing', icon: CreditCard, label: 'Billing' },
+      { to: '/account/wallet', icon: Wallet, label: 'Wallet' },
       { to: '/account/settings', icon: Settings, label: 'Settings' },
     ],
   },

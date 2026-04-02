@@ -12,6 +12,7 @@ const routeMap = {
   '/tools/users': ['Dashboard', 'Tools', 'Users'],
   '/tools/whitelist': ['Dashboard', 'Tools', 'Whitelist'],
   '/account/billing': ['Dashboard', 'Account', 'Billing'],
+  '/account/wallet': ['Dashboard', 'Account', 'Wallet'],
   '/account/settings': ['Dashboard', 'Account', 'Settings'],
 }
 
