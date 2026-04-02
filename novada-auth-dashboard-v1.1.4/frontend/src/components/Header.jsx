@@ -1,4 +1,5 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { useLocation } from 'react-router-dom'
 import { Bell, Menu, LogOut, ArrowRightLeft, ChevronDown } from 'lucide-react'
 import { sessionProfile } from '../utils/session'
@@ -18,11 +19,27 @@ export default function Header({ onMenuToggle }) {
   const location = useLocation()
   const crumbs = routeMap[location.pathname] || ['Dashboard']
   const [dropdownOpen, setDropdownOpen] = useState(false)
+  const triggerRef = useRef(null)
   const dropdownRef = useRef(null)
+  const [dropdownPos, setDropdownPos] = useState({ top: 0, right: 0 })
+
+  const openDropdown = useCallback(() => {
+    if (triggerRef.current) {
+      const rect = triggerRef.current.getBoundingClientRect()
+      setDropdownPos({
+        top: rect.bottom + 8,
+        right: window.innerWidth - rect.right,
+      })
+    }
+    setDropdownOpen(true)
+  }, [])
 
   useEffect(() => {
     const handleClickOutside = (e) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+      if (
+        dropdownRef.current && !dropdownRef.current.contains(e.target) &&
+        triggerRef.current && !triggerRef.current.contains(e.target)
+      ) {
         setDropdownOpen(false)
       }
     }
@@ -95,55 +112,60 @@ export default function Header({ onMenuToggle }) {
           <span className="absolute right-1.5 top-1.5 h-2 w-2 rounded-full bg-violet-500 ring-2 ring-white"></span>
         </button>
 
-        {/* User menu dropdown */}
-        <div className="relative" ref={dropdownRef}>
-          <button
-            type="button"
-            onClick={() => setDropdownOpen((prev) => !prev)}
-            className="flex items-center gap-2 rounded-xl px-2 py-1.5 transition-colors hover:bg-gray-50 sm:px-3"
+        {/* User menu trigger */}
+        <button
+          ref={triggerRef}
+          type="button"
+          onClick={() => dropdownOpen ? setDropdownOpen(false) : openDropdown()}
+          className="flex items-center gap-2 rounded-xl px-2 py-1.5 transition-colors hover:bg-gray-50 sm:px-3"
+        >
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-violet-100 to-purple-100">
+            <span className="text-xs font-bold text-violet-600">{sessionProfile.initials}</span>
+          </div>
+          <span className="hidden text-sm font-medium text-gray-600 max-w-[180px] truncate sm:block" title={sessionProfile.email}>{sessionProfile.email}</span>
+          <ChevronDown size={14} className={`hidden text-gray-400 transition-transform duration-200 sm:block ${dropdownOpen ? 'rotate-180' : ''}`} />
+        </button>
+
+        {/* User menu dropdown (portal) */}
+        {dropdownOpen && createPortal(
+          <div
+            ref={dropdownRef}
+            className="fixed w-72 rounded-2xl border border-gray-100 bg-white shadow-2xl animate-[fadeIn_0.15s_ease-out] z-[9998]"
+            style={{ top: dropdownPos.top, right: dropdownPos.right }}
           >
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-violet-100 to-purple-100">
-              <span className="text-xs font-bold text-violet-600">{sessionProfile.initials}</span>
-            </div>
-            <span className="hidden text-sm font-medium text-gray-600 max-w-[180px] truncate sm:block" title={sessionProfile.email}>{sessionProfile.email}</span>
-            <ChevronDown size={14} className={`hidden text-gray-400 transition-transform duration-200 sm:block ${dropdownOpen ? 'rotate-180' : ''}`} />
-          </button>
-
-          {dropdownOpen && (
-            <div className="absolute right-0 top-full mt-2 w-72 rounded-2xl border border-gray-100 bg-white shadow-2xl animate-[fadeIn_0.15s_ease-out] z-50">
-              <div className="flex items-center gap-3 p-4">
-                <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-violet-100 to-purple-100">
-                  <span className="text-sm font-bold text-violet-600">{sessionProfile.initials}</span>
-                </div>
-                <div className="min-w-0 flex-1">
-                  <p className="truncate text-sm font-semibold text-gray-800">{sessionProfile.displayName}</p>
-                  <p className="truncate text-xs text-gray-400">{sessionProfile.email}</p>
-                </div>
+            <div className="flex items-center gap-3 p-4">
+              <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-violet-100 to-purple-100">
+                <span className="text-sm font-bold text-violet-600">{sessionProfile.initials}</span>
               </div>
-
-              <div className="border-t border-gray-100" />
-
-              <div className="p-1.5">
-                <button
-                  type="button"
-                  onClick={handleSwitchAccount}
-                  className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-50 hover:text-gray-800"
-                >
-                  <ArrowRightLeft size={16} className="text-gray-400" />
-                  Switch Account
-                </button>
-                <button
-                  type="button"
-                  onClick={handleLogout}
-                  className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-gray-600 transition-colors hover:bg-red-50 hover:text-red-600"
-                >
-                  <LogOut size={16} className="text-gray-400" />
-                  Log Out
-                </button>
+              <div className="min-w-0 flex-1">
+                <p className="truncate text-sm font-semibold text-gray-800">{sessionProfile.displayName}</p>
+                <p className="truncate text-xs text-gray-400">{sessionProfile.email}</p>
               </div>
             </div>
-          )}
-        </div>
+
+            <div className="border-t border-gray-100" />
+
+            <div className="p-1.5">
+              <button
+                type="button"
+                onClick={handleSwitchAccount}
+                className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-50 hover:text-gray-800"
+              >
+                <ArrowRightLeft size={16} className="text-gray-400" />
+                Switch Account
+              </button>
+              <button
+                type="button"
+                onClick={handleLogout}
+                className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-gray-600 transition-colors hover:bg-red-50 hover:text-red-600"
+              >
+                <LogOut size={16} className="text-gray-400" />
+                Log Out
+              </button>
+            </div>
+          </div>,
+          document.body,
+        )}
       </div>
     </header>
   )
