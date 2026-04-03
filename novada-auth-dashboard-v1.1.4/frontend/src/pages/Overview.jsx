@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import {
   CheckCircle, ArrowRight,
@@ -86,12 +86,16 @@ const MsgIcon = ({ type }) => {
 export default function Overview() {
   const [codeLang, setCodeLang] = useState('cURL')
   const [copied, setCopied] = useState(false)
+  const copiedTimer = useRef(null)
+
+  useEffect(() => () => clearTimeout(copiedTimer.current), [])
 
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(codeSnippets[codeLang])
       setCopied(true)
-      setTimeout(() => setCopied(false), 2000)
+      clearTimeout(copiedTimer.current)
+      copiedTimer.current = setTimeout(() => setCopied(false), 2000)
     } catch {
       // Clipboard API may be blocked in insecure contexts
     }
@@ -280,7 +284,7 @@ export default function Overview() {
             </div>
             <div className="space-y-1">
               {messages.map((msg) => (
-                <div key={msg.id} className="flex items-start gap-3 p-3 rounded-xl hover:bg-gray-50 transition-colors cursor-pointer">
+                <div key={msg.id} className="flex items-start gap-3 p-3 rounded-xl transition-colors">
                   <div className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5 ${
                     msg.type === 'warning' ? 'bg-amber-50' :
                     msg.type === 'success' ? 'bg-emerald-50' : 'bg-violet-50'

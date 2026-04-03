@@ -101,7 +101,7 @@ export default function Settings() {
       {/* Page header */}
       <div>
         <h1 className="text-xl font-bold text-gray-900 sm:text-2xl">Account Settings</h1>
-        <p className="mt-1 text-sm text-gray-500">Update your profile, manage security requests, and customize notifications.</p>
+        <p className="mt-1 text-sm text-gray-500">View your profile, manage security requests, and customize notifications.</p>
       </div>
 
       {/* Feedback */}

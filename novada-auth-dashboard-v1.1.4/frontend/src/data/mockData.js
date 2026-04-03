@@ -124,6 +124,11 @@ export const walletData = {
     { id: 9,  date: '2026-02-10', type: 'Purchase', description: 'Rotating Proxies — Basic Plan (1 GB)',       amount: 12.50,  paymentMethod: 'Wallet Balance',      status: 'Failed' },
     { id: 10, date: '2026-02-05', type: 'Recharge', description: 'Wallet top-up',                              amount: 250.00, paymentMethod: 'Mastercard ••••8831', status: 'Completed' },
   ],
+  subscriptions: [
+    { id: 1, planName: 'Micro',   bandwidth: '5 GB',  price: 45.00,  cycle: 'monthly',   autoRenew: true,  nextRenewal: '2026-04-14', startDate: '2026-03-14' },
+    { id: 2, planName: 'Starter', bandwidth: '20 GB', price: 130.00, cycle: 'quarterly', autoRenew: true,  nextRenewal: '2026-05-20', startDate: '2026-02-20' },
+    { id: 3, planName: 'Advanced', bandwidth: '100 GB', price: 400.00, cycle: 'monthly', autoRenew: false, nextRenewal: '2026-04-08', startDate: '2026-03-08' },
+  ],
 }
 
 export const staticIps = [

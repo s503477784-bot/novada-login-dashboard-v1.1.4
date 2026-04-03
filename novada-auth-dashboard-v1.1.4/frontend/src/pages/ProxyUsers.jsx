@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useMemo, useState, useRef, useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import { Plus, Search, Eye, EyeOff, Copy, Edit2, RefreshCw, Trash2, X, Zap, Info } from 'lucide-react'
 import DataTable from '../components/DataTable'
@@ -53,11 +53,14 @@ export default function ProxyUsers() {
   const [editUser, setEditUser] = useState(null)
   const [form, setForm] = useState(emptyForm)
   const [feedback, setFeedback] = useState(null)
+  const feedbackTimer = useRef(null)
+
+  useEffect(() => () => clearTimeout(feedbackTimer.current), [])
 
   const notify = (type, message) => {
     setFeedback({ type, message })
-    window.clearTimeout(window.__proxyUsersFeedbackTimer)
-    window.__proxyUsersFeedbackTimer = window.setTimeout(() => setFeedback(null), 2200)
+    clearTimeout(feedbackTimer.current)
+    feedbackTimer.current = setTimeout(() => setFeedback(null), 2200)
   }
 
   const filtered = useMemo(() => users.filter((user) => {
@@ -104,6 +107,7 @@ export default function ProxyUsers() {
   }
 
   const handleRegenerate = (user) => {
+    if (!window.confirm(`Regenerate password for ${user.username}? This cannot be undone.`)) return
     const nextPassword = createStrongPassword()
     setUsers((current) => current.map((item) => (
       item.id === user.id ? { ...item, password: nextPassword } : item
@@ -115,6 +119,7 @@ export default function ProxyUsers() {
   }
 
   const handleDelete = (user) => {
+    if (!window.confirm(`Delete ${user.username}? This action cannot be undone.`)) return
     setUsers((current) => current.filter((item) => item.id !== user.id))
     if (editUser?.id === user.id) closeDrawer()
     notify('success', `${user.username} deleted.`)
