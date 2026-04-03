@@ -47,7 +47,12 @@ function daysUntil(dateStr) {
 }
 
 export default function Wallet() {
-  const [walletData, setWalletData] = usePersistentList('walletData')
+  const [rawWallet, setWalletData] = usePersistentList('walletData')
+  const walletData = {
+    balance: rawWallet?.balance ?? 0,
+    transactions: rawWallet?.transactions ?? [],
+    subscriptions: rawWallet?.subscriptions ?? [],
+  }
   const [showTopUp, setShowTopUp] = useState(false)
   const [topUpPreset, setTopUpPreset] = useState(null)
   const [customAmount, setCustomAmount] = useState('')

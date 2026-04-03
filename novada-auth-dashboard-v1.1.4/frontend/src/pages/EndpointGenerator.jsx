@@ -524,8 +524,23 @@ export default function EndpointGenerator() {
           </div>
 
           <div className="card p-4">
-            <div className="mb-3 px-1">
+            <div className="mb-3 flex flex-wrap items-center justify-between gap-2 px-1">
               <h3 className="text-xs font-bold uppercase tracking-wider text-gray-400">Endpoint List</h3>
+              <div className="flex flex-wrap items-center gap-2">
+                <button
+                  onClick={() => handleCopy(generated.endpoints.join('\n'), 'bulk')}
+                  className="inline-flex items-center justify-center gap-2 rounded-xl border border-violet-200 bg-violet-50/70 px-3.5 py-2 text-xs font-medium text-violet-700 transition-colors hover:bg-violet-50"
+                >
+                  {copied === 'bulk' ? <Check size={14} className="text-emerald-500" /> : <Copy size={14} />}
+                  {copied === 'bulk' ? 'Copied' : 'Copy All'}
+                </button>
+                <button
+                  onClick={handleDownload}
+                  className="inline-flex items-center justify-center gap-2 rounded-xl border border-gray-200 bg-gray-50 px-3.5 py-2 text-xs font-medium text-gray-500 transition-colors hover:bg-gray-100 hover:text-gray-700"
+                >
+                  <Download size={14} /> Download TXT
+                </button>
+              </div>
             </div>
 
             <div className="terminal-bg w-full rounded-xl p-4">
@@ -536,22 +551,6 @@ export default function EndpointGenerator() {
                   </p>
                 ))}
               </div>
-            </div>
-
-            <div className="mt-3 flex flex-wrap items-center gap-2">
-              <button
-                onClick={() => handleCopy(generated.endpoints.join('\n'), 'bulk')}
-                className="inline-flex items-center justify-center gap-2 rounded-xl border border-violet-200 bg-violet-50/70 px-3.5 py-2 text-xs font-medium text-violet-700 transition-colors hover:bg-violet-50"
-              >
-                {copied === 'bulk' ? <Check size={14} className="text-emerald-500" /> : <Copy size={14} />}
-                {copied === 'bulk' ? 'Copied' : 'Copy All'}
-              </button>
-              <button
-                onClick={handleDownload}
-                className="inline-flex items-center justify-center gap-2 rounded-xl border border-gray-200 bg-gray-50 px-3.5 py-2 text-xs font-medium text-gray-500 transition-colors hover:bg-gray-100 hover:text-gray-700"
-              >
-                <Download size={14} /> Download TXT
-              </button>
             </div>
           </div>
         </div>
