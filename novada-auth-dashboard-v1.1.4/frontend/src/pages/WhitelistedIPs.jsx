@@ -84,6 +84,7 @@ export default function WhitelistedIPs() {
   }
 
   const handleDelete = (item) => {
+    if (!window.confirm(`Remove ${item.ip} from the whitelist?`)) return
     setItems((current) => current.filter((entry) => entry.id !== item.id))
     if (editIp?.id === item.id) closeModal()
     notify('success', `${item.ip} removed.`)

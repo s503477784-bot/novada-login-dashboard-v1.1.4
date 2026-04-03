@@ -163,6 +163,11 @@ export default function EndpointGenerator() {
   const noticeTimer = useRef(null)
   const copiedTimer = useRef(null)
 
+  useEffect(() => () => {
+    clearTimeout(noticeTimer.current)
+    clearTimeout(copiedTimer.current)
+  }, [])
+
   const selectedRegion = useMemo(
     () => rotatingRegions.find((item) => item.value === region) || rotatingRegions[0],
     [region],

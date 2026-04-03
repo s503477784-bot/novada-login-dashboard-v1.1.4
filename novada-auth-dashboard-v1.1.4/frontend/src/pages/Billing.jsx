@@ -221,7 +221,7 @@ export default function Billing() {
                 </div>
                 <div>
                   <p className="text-[10px] font-bold uppercase tracking-wider text-gray-400">Status</p>
-                  <p className="mt-0.5 text-sm font-semibold text-emerald-600">Paid</p>
+                  <p className="mt-0.5 text-sm font-semibold text-emerald-600">{invoiceRecord.status}</p>
                 </div>
               </div>
 

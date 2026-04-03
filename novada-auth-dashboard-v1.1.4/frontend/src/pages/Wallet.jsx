@@ -55,15 +55,15 @@ export default function Wallet() {
   const [purchaseConfirm, setPurchaseConfirm] = useState(null)
   const [editSub, setEditSub] = useState(null)
   const [editCycle, setEditCycle] = useState('monthly')
-  const [successMsg, setSuccessMsg] = useState(null)
-  const successTimer = useRef(null)
+  const [toast, setToast] = useState(null)
+  const toastTimer = useRef(null)
 
-  useEffect(() => () => clearTimeout(successTimer.current), [])
+  useEffect(() => () => clearTimeout(toastTimer.current), [])
 
-  const showSuccess = (msg) => {
-    setSuccessMsg(msg)
-    clearTimeout(successTimer.current)
-    successTimer.current = setTimeout(() => setSuccessMsg(null), 3000)
+  const showToast = (msg, type = 'success') => {
+    setToast({ msg, type })
+    clearTimeout(toastTimer.current)
+    toastTimer.current = setTimeout(() => setToast(null), 3000)
   }
 
   const totalTopUps = useMemo(() =>
@@ -102,7 +102,7 @@ export default function Wallet() {
     setShowTopUp(false)
     setTopUpPreset(null)
     setCustomAmount('')
-    showSuccess(`Successfully added ${formatCurrency(topUpAmount)} to your wallet`)
+    showToast(`Successfully added ${formatCurrency(topUpAmount)} to your wallet`)
   }
 
   const handlePurchase = () => {
@@ -134,18 +134,19 @@ export default function Wallet() {
       subscriptions: [newSub, ...prev.subscriptions],
     }))
     setPurchaseConfirm(null)
-    showSuccess(`Purchased ${plan.name} plan for ${formatCurrency(plan.monthlyBase)}`)
+    showToast(`Purchased ${plan.name} plan for ${formatCurrency(plan.monthlyBase)}`)
   }
 
   const toggleAutoRenew = (subId) => {
+    const sub = walletData.subscriptions.find((s) => s.id === subId)
+    const wasEnabled = sub?.autoRenew
     setWalletData((prev) => ({
       ...prev,
       subscriptions: prev.subscriptions.map((s) =>
         s.id === subId ? { ...s, autoRenew: !s.autoRenew } : s
       ),
     }))
-    const sub = walletData.subscriptions.find((s) => s.id === subId)
-    showSuccess(sub?.autoRenew ? 'Auto-renewal disabled' : 'Auto-renewal enabled')
+    showToast(wasEnabled ? 'Auto-renewal disabled' : 'Auto-renewal enabled')
   }
 
   const openEditSub = (sub) => {
@@ -163,7 +164,7 @@ export default function Wallet() {
       ),
     }))
     setEditSub(null)
-    showSuccess(`Renewal cycle updated to ${editCycle}`)
+    showToast(`Renewal cycle updated to ${editCycle}`)
   }
 
   const handleCancelSub = (subId) => {
@@ -172,13 +173,13 @@ export default function Wallet() {
       subscriptions: prev.subscriptions.filter((s) => s.id !== subId),
     }))
     setEditSub(null)
-    showSuccess('Subscription cancelled')
+    showToast('Subscription cancelled')
   }
 
   const handleRenewNow = (sub) => {
     const cost = getCyclePrice(sub.price, sub.cycle)
     if (walletData.balance < cost) {
-      showSuccess('Insufficient balance — please top up first')
+      showToast('Insufficient balance — please top up first', 'error')
       return
     }
     const newTx = {
@@ -199,16 +200,16 @@ export default function Wallet() {
         s.id === sub.id ? { ...s, nextRenewal: newNext } : s
       ),
     }))
-    showSuccess(`Renewed ${sub.planName} plan for ${formatCurrency(cost)}`)
+    showToast(`Renewed ${sub.planName} plan for ${formatCurrency(cost)}`)
   }
 
   return (
     <div className="space-y-6 animate-[slideUp_0.5s_ease-out]">
-      {/* Success toast */}
-      {successMsg && createPortal(
-        <div className="fixed right-4 top-4 z-50 flex items-center gap-2 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-medium text-emerald-700 shadow-lg animate-[fadeIn_0.2s_ease-out]">
-          <Check size={16} />
-          {successMsg}
+      {/* Toast notification */}
+      {toast && createPortal(
+        <div className={`fixed right-4 top-4 z-50 flex items-center gap-2 rounded-xl border px-4 py-3 text-sm font-medium shadow-lg animate-[fadeIn_0.2s_ease-out] ${toast.type === 'error' ? 'border-red-200 bg-red-50 text-red-700' : 'border-emerald-200 bg-emerald-50 text-emerald-700'}`}>
+          {toast.type === 'error' ? <AlertTriangle size={16} /> : <Check size={16} />}
+          {toast.msg}
         </div>,
         document.body,
       )}
@@ -278,7 +279,7 @@ export default function Wallet() {
         <div className="mb-4 flex items-center gap-2">
           <RefreshCw size={16} className="text-violet-500" />
           <h2 className="text-sm font-bold text-gray-800">Subscription Renewals</h2>
-          <span className="text-xs text-gray-400">— manage auto-renewal and billing cycles</span>
+          <span className="text-xs text-gray-400">Manage auto-renewal and billing cycles</span>
         </div>
 
         {walletData.subscriptions.length === 0 ? (
@@ -333,24 +334,24 @@ export default function Wallet() {
                     </div>
 
                     {/* Actions */}
-                    <div className="flex flex-shrink-0 items-center gap-2">
+                    <div className="flex flex-shrink-0 flex-wrap items-center gap-2">
                       <button
                         onClick={() => handleRenewNow(sub)}
-                        className="flex items-center gap-1.5 rounded-xl border border-violet-200 bg-violet-50/70 px-3 py-2 text-xs font-semibold text-violet-700 transition-colors hover:bg-violet-100"
+                        className="flex items-center gap-1.5 rounded-xl border border-violet-200 bg-violet-50/70 px-3 py-2.5 text-xs font-semibold text-violet-700 transition-colors hover:bg-violet-100"
                       >
                         <RefreshCw size={13} />
                         Renew Now
                       </button>
                       <button
                         onClick={() => openEditSub(sub)}
-                        className="flex items-center gap-1.5 rounded-xl border border-gray-200 px-3 py-2 text-xs font-semibold text-gray-600 transition-colors hover:bg-gray-50"
+                        className="flex items-center gap-1.5 rounded-xl border border-gray-200 px-3 py-2.5 text-xs font-semibold text-gray-600 transition-colors hover:bg-gray-50"
                       >
                         <Edit2 size={13} />
                         Edit
                       </button>
                       <button
                         onClick={() => toggleAutoRenew(sub.id)}
-                        className={`flex items-center gap-1.5 rounded-xl border px-3 py-2 text-xs font-semibold transition-colors ${sub.autoRenew ? 'border-amber-200 text-amber-600 hover:bg-amber-50' : 'border-emerald-200 text-emerald-600 hover:bg-emerald-50'}`}
+                        className={`flex items-center gap-1.5 rounded-xl border px-3 py-2.5 text-xs font-semibold transition-colors ${sub.autoRenew ? 'border-amber-200 text-amber-600 hover:bg-amber-50' : 'border-emerald-200 text-emerald-600 hover:bg-emerald-50'}`}
                         title={sub.autoRenew ? 'Disable auto-renewal' : 'Enable auto-renewal'}
                       >
                         {sub.autoRenew ? <PowerOff size={13} /> : <Power size={13} />}
