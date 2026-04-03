@@ -136,7 +136,7 @@ export default function Overview() {
         <div className="space-y-5 animate-[slideUp_0.4s_ease-out] xl:col-span-7">
 
           {/* Account Balance */}
-          <div className="card p-6">
+          <div className="card p-6 overflow-hidden">
             <div className="flex items-center gap-2 mb-5">
               <div className="w-9 h-9 rounded-xl bg-violet-50 flex items-center justify-center">
                 <Wallet size={18} className="text-violet-600" />
@@ -175,7 +175,7 @@ export default function Overview() {
           </div>
 
           {/* 7-day traffic trend */}
-          <div className="card p-6">
+          <div className="card p-6 overflow-hidden">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-2">
                 <TrendingUp size={16} className="text-violet-500" />
@@ -203,7 +203,7 @@ export default function Overview() {
           </div>
 
           {/* Code Integration */}
-          <div className="card p-6 animate-[slideUp_0.5s_ease-out]">
+          <div className="card p-6 overflow-hidden animate-[slideUp_0.5s_ease-out]">
             <div className="flex items-center justify-between mb-2">
               <div className="flex items-center gap-2">
                 <Code size={16} className="text-violet-500" />
@@ -220,7 +220,7 @@ export default function Overview() {
             <p className="text-xs text-gray-400 mb-4">Copy ready-to-use proxy snippets for your preferred language. Replace the credentials and start routing traffic in seconds.</p>
 
             {/* Language tabs */}
-            <div className="flex gap-1 mb-3 bg-gray-100 rounded-lg p-1 w-fit">
+            <div className="flex gap-1 mb-3 bg-gray-100 rounded-lg p-1 w-fit max-w-full overflow-x-auto">
               {Object.keys(codeSnippets).map((lang) => (
                 <button
                   key={lang}
